@@ -31,9 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'presents.apps.CloneConfig',
+    'presents.apps.PresentsConfig',
     "bootstrap5",
     'django_bootstrap_icons',
+    'rest_framework',
     
     'django.contrib.admin',
     'django.contrib.auth',
