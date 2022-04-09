@@ -1,0 +1,31 @@
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
+{% load static%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{title}}</title>
+    {{else}}
+    <title>p-aWWards</title>
+    {% endif %}
+    {% block styles %}
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    {% bootstrap_css %}
+</head>
+<body>
+    {% include "navbar.html" %}
+    {% block content %}
+    {% endblock %}
+
+
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    <script src=" {% static 'js/home.js' %}"></script>
+    {% endblock %}
+</body>
+</html>
