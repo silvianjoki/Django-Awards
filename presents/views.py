@@ -4,8 +4,8 @@ from .models import Profile, Project, Vote
 from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm, RateProjectForm, CreateProjectForm
 from .email import send_signup_email
-
-
+from django.http import JsonResponse
+from rest_framework import status
 
 
 

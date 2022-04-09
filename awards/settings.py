@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "bootstrap5",
     'django_bootstrap_icons',
     'rest_framework',
+    'rest_framework.authtoken',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -146,3 +147,14 @@ EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_PORT = config('EMAIL_PORT')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+#.....
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}
+
+
+LOGIN_REDIRECT_URL='/home'
