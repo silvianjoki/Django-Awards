@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django_bootstrap_icons',
     'rest_framework',
     'rest_framework.authtoken',
-    'django_registration',
     
     'django.contrib.admin',
     'django.contrib.auth',

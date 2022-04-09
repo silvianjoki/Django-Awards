@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from .models import Profile, Project, Vote
 from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm, RateProjectForm, CreateProjectForm
-from .email import send_signup_email
+from .email import send_welcome_email
 from django.http import JsonResponse
 from rest_framework import status
 
@@ -30,7 +30,7 @@ def email(request):
     current_user = request.user
     email = current_user.email
     name = current_user.username
-    send_signup_email(name, email)
+    send_welcome_email(name, email)
     return redirect(create_profile)
     
 
