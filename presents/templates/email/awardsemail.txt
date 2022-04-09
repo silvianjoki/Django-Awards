@@ -1,0 +1,3 @@
+Hello {{name}}
+
+Welcome to the sly-Awwards newsletter You will find the most exciting news about new projects.
