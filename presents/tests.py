@@ -68,7 +68,7 @@ class VoteTestCase(TestCase):
         self.silvia = User(username = 'silvia',  email ='silvia@gmail.com', password= '1234')
         self.profile = Profile(user = self.silvia, profile_pic='mypicture', bio='bio', location= 'nairobi', email='silvia@gmail.com', link = 'www.profile.com')
         self.project = Project(name='testing', screenshot ='screenshoturl', description='sample project', link='testlink', profile=self.profile)
-        self.vote = Vote(voter=self.profile, project=self.project, design=9, usability= 4, creativity=6, design= 7, content = 3)
+        self.vote = Vote(voter=self.profile, project=self.project, design=9, usability= 4, creativity=6, content = 3)
         
         self.silvia.save()
         self.profile.save_profile
