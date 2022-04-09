@@ -33,3 +33,4 @@ def email(request):
     send_signup_email(name, email)
     return redirect(create_profile)
     
+

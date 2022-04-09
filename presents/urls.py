@@ -21,9 +21,6 @@ urlpatterns = [
     path('api/projects/', views.ProjectList.as_view()),
     path('api/profiles/', views.ProfileList.as_view()),
     
-
-
-
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/',
@@ -33,3 +30,4 @@ urlpatterns = [
     re_path('^logout/$', auth_views.LogoutView.as_view(), name='logout'), 
     re_path('^login/$', LoginView.as_view(), {"next_page": '/'}),
 ]
+
