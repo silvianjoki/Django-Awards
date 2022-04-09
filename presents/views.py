@@ -1,3 +1,4 @@
+from turtle import title
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .models import Profile, Project, Vote
@@ -7,11 +8,11 @@ from .email import send_welcome_email
 from django.http import JsonResponse
 from rest_framework import status
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 
 
 # Create your views here.
-
 def create_profile(request):
     current_user = request.user
     title = "Create Profile"
@@ -117,4 +118,63 @@ def project ( request, project_id):
             project.creator_creativity = creator_creativity
             project.save() 
         
-    return render(request, 'project/project.html', {'title':title, 'form':form, 'project':project, 'votes':votes, 'total_votes':total_votes, 'voted':voted})
+    return render(request, 'project/project.html', {'title':title, 'form':form, 'voter':voter, 'project':project, 'votes':votes, 'total_votes':total_votes, 'voted':voted})
+
+
+@login_required(login_url='/accounts/login/')
+def add_project(request):
+    title = 'add new project'
+    if request.method == 'POST':
+        form = CreateProjectForm(request.POST, request.FILES)
+        current_user = request.user
+        try:
+            profile = Profile.objects.get(user=current_user)
+        except Profile.ObjectDoesNotExist:
+            raise Http404()
+        if form.is_valid():
+            project =form.save(commit=False)
+            project.profile=profile
+            project.save() 
+        return redirect('home')           
+    else:
+        form =CreateProjectForm()
+    return render(request, 'project/add_project.html', {'form':form, 'title':title})
+
+@login_required(login_url='/accounts/login/')
+def search_project(request):
+    if "project" in request.GET and request.GET["project"]:
+        searched_project = request.GET.get("project")
+        title = "sly-aWWards | search"
+        voted = False
+        try:
+            projects = Project.search_project(searched_project)
+            count = projects.count()
+            message =f"{searched_project}"
+            if len(projects) == 1:
+                project = projects[0]
+                form = RateProjectForm()
+                title = project.name.upper()
+                votes = Vote.get_project_votes(project.id)
+                voters = project.voters
+                
+                voters_list =[]
+                
+                for vote in votes:
+                    try:
+                        user = User.objects.get(pk = request.user.id)
+                        profile = Profile.objects.get(user = user)
+                        voter = Vote.get_project_voters(profile)
+                        voted = False
+                        if request.user.id in voters_list: 
+                            voted = True
+                    except Profile.DoesNotExist:
+                        voted = False
+                return render(request, 'project/project.html', {"form": form, "project":  project, "voted": voted, "votes": votes, "title": title})
+            return render(request, 'project/search.html', {"projects": projects,"message": message, "count":count, "title": title})
+        except ObjectDoesNotExist:
+            suggestions = Project.display_all_projects()
+            message= f"We found NO projects titled {searched_project}"
+            return render(request, 'project/search.html', {"suggestions":suggestions,"message": message, "title": title})
+    else:
+        message = "You haven't searched for any projecr"
+        return render(request,'project/search.html', {"message": message, "title": title})
