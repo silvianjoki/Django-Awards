@@ -140,6 +140,19 @@ def add_project(request):
         form =CreateProjectForm()
     return render(request, 'project/add_project.html', {'form':form, 'title':title})
 
+
+@login_required(login_url='/accounts/login/')
+def rate_project(request, project_id):
+    if request.method == 'POST':
+        form = RateProjectForm(request.POST, request.FILES)
+        project = Project.objects.get(pk = project_id)
+        current_user= request.user
+        try:
+            user = User.objects.get(pk = current_user.id)
+            profile = Profile.objects.get(user=user)
+        except Profile.DoesNotExist:
+            raise Http404()
+
 @login_required(login_url='/accounts/login/')
 def search_project(request):
     if "project" in request.GET and request.GET["project"]:
@@ -178,3 +191,4 @@ def search_project(request):
     else:
         message = "You haven't searched for any projecr"
         return render(request,'project/search.html', {"message": message, "title": title})
+    
