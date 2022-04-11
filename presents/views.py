@@ -2,6 +2,7 @@ from turtle import title
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
+
 from presents.serializer import ProjectSerializer
 from .models import Profile, Project, Vote
 from django.contrib.auth.decorators import login_required
@@ -11,7 +12,7 @@ from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from serializer import ProjectSerializer, ProfileSerializer
+from .serializer import ProjectSerializer, ProfileSerializer
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
