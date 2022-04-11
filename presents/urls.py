@@ -18,8 +18,8 @@ urlpatterns = [
     path('add_project/', views.add_project, name='add_project'),
     path('search_project/', views.search_project, name= 'search_project'),
     path('rate_project/', views.rate_project, name ='rate_project'),
-    path('api/projects/', views.ProjectList.as_view()),
-    path('api/profiles/', views.ProfileList.as_view()),
+    re_path(r'^api/projects/$', views.ProjectList.as_view()),
+    re_path(r'^api/profiles/$', views.ProfileList.as_view()),
     
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -31,3 +31,6 @@ urlpatterns = [
     re_path('^login/$', LoginView.as_view(), {"next_page": '/'}),
 ]
 
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

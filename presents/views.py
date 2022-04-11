@@ -45,7 +45,7 @@ def email(request):
 @login_required(login_url='/accounts/login/')
 def home(request):
     projects = Project.display_all_projects()
-    projects_scores = projects.order_by('-average_score')
+    projects_scores = projects.order_by('-creator_score')
     highest_score = None
     highest_votes = None
     if len(projects) >= 1:
@@ -202,7 +202,7 @@ def search_project(request):
 
 
 class ProfileList(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly)
     def get(self, request, format=None):
         profiles = Profile.objects.all()
         serializers = ProfileSerializer(profiles, many=True)
@@ -218,7 +218,7 @@ class ProfileList(APIView):
     
     
 class ProjectList(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly)
     def get(self, request, format=None):
         projects = Project.objects.all()
         serializers = ProfileSerializer(projects, many=True)
