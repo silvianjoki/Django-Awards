@@ -1,13 +1,17 @@
-{% extends 'base.html'% }
+{% extends 'base.html'%}
 {% load bootstrap_icons %}
 {% load static %}
+{% load bootstrap5 %}
 
 {% block styles%}
-{{ block.super}}
-<lin rel='stylesheet' href="{ static 'css/home.css'} ">
+    {% bootstrap_css %}
+
+    <link rel='stylesheet' href="{% static 'css/home.css'%}">
 {% endblock%}
 
 {% block content%}
 
+
+<h1>hello</h1>
 
 {% endblock %}
