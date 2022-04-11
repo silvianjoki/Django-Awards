@@ -9,9 +9,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
     profile_pic = models.ImageField(upload_to = 'images/', null=True)
     bio =  models.TextField()
-    location = models.CharField(max_length = 40)
     email = models.EmailField()
-    link = models.URLField()
+
 
     def __str__(self):
         return self.user.username
@@ -33,7 +32,6 @@ class Project(models.Model):
     link = models.URLField()
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     voters = models.IntegerField()
-    post_date = models.DateTimeField(auto_now_add=True, null=True)
     creator_design = models.FloatField(default=0)
     creator_usability = models.FloatField(default=0)
     creator_creativity = models.FloatField(default=0)
