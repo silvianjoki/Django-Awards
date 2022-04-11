@@ -1,12 +1,17 @@
 from turtle import title
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
+
+from presents.serializer import ProjectSerializer
 from .models import Profile, Project, Vote
 from django.contrib.auth.decorators import login_required
 from .forms import CreateProfileForm, RateProjectForm, CreateProjectForm
 from .email import send_welcome_email
 from django.http import JsonResponse
 from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from serializer import ProjectSerializer, ProfileSerializer
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -192,3 +197,16 @@ def search_project(request):
         message = "You haven't searched for any projecr"
         return render(request,'project/search.html', {"message": message, "title": title})
     
+
+
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        profiles = Profile.objects.all()
+        serializers = ProfileSerializer(profiles, many=True)
+        return Response(serializers.data)
+        
+class ProjectList(APIView):
+    def get(self, request, format=None):
+        projects = Project.objects.all()
+        serializers = ProfileSerializer(projects, many=True)
+        return Response(serializers.data)
