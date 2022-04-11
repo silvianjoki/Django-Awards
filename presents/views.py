@@ -1,6 +1,7 @@
 from turtle import title
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
+from .permissions import IsAuthenticatedOrReadOnly
 
 
 from presents.serializer import ProjectSerializer
@@ -201,13 +202,31 @@ def search_project(request):
 
 
 class ProfileList(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     def get(self, request, format=None):
         profiles = Profile.objects.all()
         serializers = ProfileSerializer(profiles, many=True)
         return Response(serializers.data)
         
+    def post(self, request, format=None):
+        serializers= ProfileSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.data, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+    
 class ProjectList(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     def get(self, request, format=None):
         projects = Project.objects.all()
         serializers = ProfileSerializer(projects, many=True)
         return Response(serializers.data)
+    
+    def post(self, request, format=None):
+        serializers= ProjectSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=status.HTTP_201_CREATED)
+        return Response(serializers.data, status=status.HTTP_400_BAD_REQUEST)
