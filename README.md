@@ -1,6 +1,7 @@
 
 ## Django-Awards 
- an application rating platform for software developers 
+
+ an application rating platform for software developers . It lets you add your website and rate other websites based on the creativitty, content, usability.
 #### By Silvia Njoki
 
 ## Description
