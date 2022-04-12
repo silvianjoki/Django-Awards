@@ -11,7 +11,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
-    re_path('^$', views.home, name = 'home'),
+    re_path('^$', views.index, name = 'index'),
+    re_path('home', views.home, name = 'home'),
     path ('email/', views.email, name = 'email'),
     path('create_profile/', views.create_profile, name = 'create_profile'),
     path('profile/', views.profile, name='profile'),

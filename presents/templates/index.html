@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+{% load bootstrap5 %}
+{% load bootstrap_icons %}
+{% load static %}
+
+
+{% block styles%}
+    {% bootstrap_css %}
+    <link rel='stylesheet' href="{% static 'css/home.css'%}">
+{% endblock%}
+
+
+{% block content%}
+
+<h1 style: 'text-align:center; font-family:Roboto, font-size:xxx-large'>Welcome to Sly-aWWards</h1>
+{% endblock %}
