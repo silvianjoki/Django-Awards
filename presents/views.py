@@ -1,4 +1,4 @@
-from turtle import title
+
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import redirect, render
 from .permissions import IsAuthenticatedOrReadOnly
