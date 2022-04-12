@@ -11,7 +11,7 @@
 
 {% block content%}
 
-<div class='container'>
+<div class='container-fluid'>
     <div class="row ">
         {% for project in projects %}
         <div class="col-6 .col-sm-3">
@@ -23,7 +23,7 @@
                         <p class="card-text">{{project.description}} </p>
                         <div class="card__meta">
                             {% if project.creator_score != 0.0 %}
-                            <a href="#">{{project.creator_score}}</a>
+                            <a href="#">{{project.creator_score | floatformat:0 }}</a>
                             {% else%}
                             {% endif %}
                         </div>

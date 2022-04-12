@@ -148,6 +148,7 @@ def add_project(request):
     return render(request, 'project/add_project.html', {'form':form, 'title':title})
 
 
+
 @login_required(login_url='/accounts/login/')
 def rate_project(request, project_id):
     if request.method == 'POST':
