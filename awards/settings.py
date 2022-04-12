@@ -19,7 +19,7 @@ import dj_database_url
 
 # SECURITY WARNING: keep the secret key used in production secret!
 MODE=config("MODE", default="dev")
-SECRET_KEY = 'django-insecure-ncn-5hu(lp=d5n6&m)3d+5v#&cg282a0v@7^rjz1_lvzdqe$8v'
+SECRET_KEY = 'django-insecure-m8l4*@e&o%f2dku!0-n1ux7$=8vg^mv*!71j$6%3#osyqzwy2('
 DEBUG = config('DEBUG', default=False, cast=bool)
 # development
 if config('MODE')=="dev":
