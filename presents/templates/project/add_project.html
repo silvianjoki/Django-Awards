@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% load bootstrap5%}
+{% load static %}
+{% load bootstrap_icons%}
+
+{% block styles %}
+    {{ block.super}}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content%}
+<div class='title'>
+    <h1 style='text-align: center;font-family:Dancing-Script, cursive; font-size: xxx-large; padding-top:3%; color:brown'>Add new project here</h1>
+</div>
+
+<form action="{%url 'add_project'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}    
+    {% bootstrap_form form%}
+    <input type="submit" class="btn btn-dark " value=" Add Project">
+</form>
+
+{% endblock%}

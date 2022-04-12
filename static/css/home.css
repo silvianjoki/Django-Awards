@@ -6,3 +6,17 @@
     margin-right: 0.6em;
 }
 
+.card {
+    margin: 3%;
+    width: 21rem;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+}
+
+.cards{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+
+}
